@@ -25,7 +25,7 @@
       --shadow-card: 0 18px 45px rgba(74, 59, 44, 0.11);
     }
 
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -78,6 +78,7 @@
       margin: 12px auto;
       width: 190px;
       color: var(--champagne);
+      pointer-events: none;
     }
 
     .divider-ornament::before,
@@ -177,7 +178,7 @@
     }
 
     /* =========================================================================
-       COVER LAYAR PENUH
+       COVER LAYAR PENUH (FULL BODY FRAMING)
        ========================================================================= */
     .cover {
       position: fixed;
@@ -187,13 +188,22 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 36px 20px 32px;
+      padding: 28px 20px 26px;
       text-align: center;
-      background-color: var(--ivory);
-      background-size: cover;
-      background-position: center 22%;
+      background-color: var(--ivory-soft);
       transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
       overflow-y: auto;
+    }
+
+    .cover-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .cover::before {
@@ -202,14 +212,14 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(250, 247, 242, 0.94) 0%,
-        rgba(250, 247, 242, 0.72) 26%,
-        rgba(250, 247, 242, 0.12) 50%,
-        rgba(74, 59, 44, 0.24) 70%,
-        rgba(250, 247, 242, 0.96) 100%
+        rgba(250, 247, 242, 0.92) 0%,
+        rgba(250, 247, 242, 0.45) 22%,
+        rgba(250, 247, 242, 0) 48%,
+        rgba(250, 247, 242, 0.55) 78%,
+        rgba(250, 247, 242, 0.95) 100%
       );
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     .cover.is-open {
@@ -221,7 +231,7 @@
     .cover-header,
     .cover-footer {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100%;
       max-width: 440px;
       display: flex;
@@ -230,27 +240,27 @@
     }
 
     .cover-title {
-      font-size: clamp(48px, 11vw, 72px);
-      margin: 4px 0 6px;
-      text-shadow: 0 2px 18px rgba(250, 247, 242, 0.95);
+      font-size: clamp(46px, 10.5vw, 68px);
+      margin: 2px 0 4px;
+      text-shadow: 0 2px 18px rgba(250, 247, 242, 0.98);
     }
 
     .cover-date {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(18px, 3.8vw, 22px);
+      font-size: clamp(17px, 3.6vw, 21px);
       font-weight: 600;
       color: var(--espresso);
-      text-shadow: 0 1px 10px rgba(250, 247, 242, 0.9);
+      text-shadow: 0 1px 10px rgba(250, 247, 242, 0.95);
     }
 
     .guest-box {
       width: 100%;
       max-width: 340px;
-      background: rgba(255, 253, 249, 0.94);
+      background: rgba(255, 253, 249, 0.95);
       border: 1px solid var(--champagne);
       border-radius: 16px;
-      padding: 14px 18px;
-      margin: 10px 0 18px;
+      padding: 12px 18px;
+      margin: 8px 0 14px;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(6px);
       position: relative;
@@ -270,18 +280,19 @@
       color: var(--espresso-muted);
       letter-spacing: 0.04em;
       margin-bottom: 4px;
+      text-shadow: 0 1px 8px rgba(250, 247, 242, 0.95);
     }
 
     .guest-box-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 700;
       color: var(--espresso);
       word-break: break-word;
     }
 
     .cover-venue {
-      margin-top: 14px;
+      margin-top: 12px;
       font-size: 11.5px;
       font-weight: 500;
       color: var(--espresso);
@@ -315,6 +326,11 @@
     .music-toggle:hover {
       transform: translateY(-2px);
       background: var(--surface);
+    }
+
+    .music-toggle.playing {
+      background: var(--champagne);
+      color: #FFFFFF;
     }
 
     .music-toggle.playing svg {
@@ -614,22 +630,23 @@
        GALERI FOTO (A LOVE STORY + SLIDESHOW + GRID LIGHTBOX)
        ========================================================================= */
     .story-spotlight {
-      background: var(--surface);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--ivory-soft) 100%);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 18px;
-      max-width: 680px;
+      border-radius: 22px;
+      padding: 24px;
+      max-width: 720px;
       margin: 0 auto 38px;
       box-shadow: var(--shadow-soft);
       text-align: center;
     }
 
     .story-spotlight-img-wrap {
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       cursor: zoom-in;
       aspect-ratio: 4 / 3;
       background: var(--ivory-soft);
+      border: 1px solid rgba(184, 146, 90, 0.22);
     }
 
     .story-spotlight-img-wrap img {
@@ -645,12 +662,32 @@
       transform: scale(1.03);
     }
 
-    .story-caption {
+    .story-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 20px;
+      font-size: clamp(24px, 4.2vw, 30px);
+      font-weight: 700;
       color: var(--espresso);
-      margin-top: 14px;
+      margin-top: 20px;
+      margin-bottom: 4px;
+    }
+
+    .story-narrative {
+      max-width: 580px;
+      margin: 14px auto 0;
+      text-align: left;
+    }
+
+    .story-narrative p {
+      font-size: 13.8px;
+      line-height: 1.85;
+      color: var(--espresso-muted);
+      margin-bottom: 13px;
+    }
+
+    .story-narrative p:last-child {
+      margin-bottom: 0;
+      color: var(--espresso);
+      font-weight: 500;
     }
 
     /* Slideshow Utama */
@@ -989,17 +1026,27 @@
     }
 
     /* =========================================================================
-       WEDDING GIFT
+       WEDDING GIFT (DUA REKENING: BANK MAYORA & BANK BCA)
        ========================================================================= */
-    .gift-card {
-      max-width: 520px;
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 780px;
       margin: 0 auto;
+    }
+
+    .gift-card {
       background: var(--surface);
       border: 1px solid var(--border-subtle);
       border-radius: 22px;
-      padding: 36px 26px;
+      padding: 32px 24px;
       text-align: center;
       box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .bank-pill {
@@ -1012,7 +1059,7 @@
       background: var(--ivory-soft);
       padding: 5px 14px;
       border-radius: 999px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .account-holder {
@@ -1132,7 +1179,8 @@
        ========================================================================= */
     @media (max-width: 780px) {
       .couple-grid,
-      .rsvp-layout {
+      .rsvp-layout,
+      .gift-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1152,6 +1200,10 @@
     @media (max-width: 480px) {
       section {
         padding: 72px 16px;
+      }
+
+      .story-spotlight {
+        padding: 18px 16px;
       }
 
       .countdown-wrapper {
@@ -1181,14 +1233,14 @@
   </button>
 
   <!-- Audio Musik Latar -->
-  <audio id="bgMusic" loop preload="auto">
-    <source id="bgMusicSource" src="assets/music.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bgMusic" loop preload="auto"></audio>
 
   <!-- =========================================================================
-       COVER UNDANGAN LAYAR PENUH
+       COVER UNDANGAN LAYAR PENUH (FULL BODY)
        ========================================================================= -->
   <div class="cover" id="coverScreen">
+    <img class="cover-bg-photo" id="coverPhoto" alt="Foto pembuka undangan Meylius & Listra">
+
     <div class="cover-header">
       <p class="eyebrow">The Wedding Of</p>
       <h1 class="script-name cover-title">Meylius &amp; Listra</h1>
@@ -1392,7 +1444,29 @@
       <div class="story-spotlight-img-wrap" id="spotlightTrigger">
         <img id="loveStoryPhoto" alt="A Love Story Meylius dan Listra">
       </div>
-      <p class="story-caption">“A Love Story — Dua hati, satu janji, dan perjalanan baru dalam kasih Tuhan.”</p>
+
+      <h3 class="story-heading">Dari Pertemuan Menjadi Satu Tujuan</h3>
+      <div class="divider-ornament" aria-hidden="true">
+        <span class="divider-diamond"></span>
+      </div>
+
+      <div class="story-narrative">
+        <p>
+          Semua berawal dari sebuah malam yang sederhana, ketika kita dipertemukan dalam acara Pemuda dan Pemudi di Gereja. Tak pernah terbayangkan sebelumnya bahwa pertemuan malam itu akan menjadi awal dari sebuah kisah yang begitu berarti.
+        </p>
+        <p>
+          Berawal dari sapaan sederhana, percakapan kecil, hingga perlahan tumbuh rasa nyaman yang membawa kita semakin dekat. Waktu demi waktu mengajarkan kita arti mengenal, memahami, menerima, dan saling menguatkan dalam setiap keadaan.
+        </p>
+        <p>
+          Perjalanan ini tentu tidak selalu mudah—selama 6 tahun kita saling mengenal dan belajar bersama, tentu ada suka dan duka, tawa dan air mata. Tetapi kita memilih untuk tetap berjalan bersama, saling menggenggam, dan percaya bahwa setiap langkah memiliki tujuan.
+        </p>
+        <p>
+          Hingga akhirnya, kita menyadari bahwa cinta bukan hanya tentang menemukan seseorang yang tepat, tetapi juga tentang memutuskan untuk terus bersama dalam setiap musim kehidupan.
+        </p>
+        <p>
+          Dari pertemuan di rumah Tuhan, kini kita melangkah menuju janji suci di hadapan Tuhan. Dengan penuh rasa syukur, kami ingin membagikan hari Pernikahan kami yang penuh dengan sukacita ini kepada keluarga dan sahabat terkasih.
+        </p>
+      </div>
     </div>
 
     <!-- Slideshow Interaktif -->
@@ -1507,7 +1581,7 @@
   </section>
 
   <!-- =========================================================================
-       6. BAGIAN WEDDING GIFT
+       6. BAGIAN WEDDING GIFT (DUA REKENING: MEYLIUS & LISTRA)
        ========================================================================= -->
   <section class="reveal" id="gift">
     <div class="section-header">
@@ -1521,18 +1595,41 @@
       </p>
     </div>
 
-    <div class="gift-card">
-      <span class="bank-pill" id="giftBankLabel">Bank Central Asia (BCA)</span>
-      <p class="account-holder" id="giftHolderLabel">Meylius Galeh Raharto</p>
-      <div class="account-number-box" id="giftAccountLabel">1234567890</div>
-      <div>
-        <button class="btn btn-primary" id="copyAccountBtn" type="button">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          <span>Salin Nomor Rekening</span>
-        </button>
+    <div class="gift-grid">
+      <!-- Rekening Meylius (Bank Mayora) -->
+      <div class="gift-card">
+        <div>
+          <span class="bank-pill" id="giftBank1">Bank Mayora</span>
+          <p class="account-holder" id="giftHolder1">Meylius Galeh Raharto</p>
+        </div>
+        <div class="account-number-box" id="giftAccount1">1234567890</div>
+        <div>
+          <button class="btn btn-primary" id="copyAccount1Btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Salin Rekening Meylius</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Rekening Listra (Bank BCA) -->
+      <div class="gift-card">
+        <div>
+          <span class="bank-pill" id="giftBank2">Bank Central Asia (BCA)</span>
+          <p class="account-holder" id="giftHolder2">Listra Luahambowo</p>
+        </div>
+        <div class="account-number-box" id="giftAccount2">0987654321</div>
+        <div>
+          <button class="btn btn-primary" id="copyAccount2Btn" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Salin Rekening Listra</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -1575,7 +1672,7 @@
   <script>
     /**
      * =========================================================================
-     * KONFIGURASI UTAMA UNDANGAN (MUDAH DISESUAIKAN)
+     * KONFIGURASI UTAMA UNDANGAN (TERHUBUNG LANGSUNG KE FOLDER GOOGLE DRIVE)
      * =========================================================================
      */
     const WEDDING_CONFIG = {
@@ -1586,37 +1683,47 @@
       venueName: "GPdI El-Shaddai Jababeka II",
       venueAddress: "Ruko Food Promenade CBP Unit 8G, Kawasan Industri Jababeka II, Cikarang, Bekasi",
       mapsUrl: "https://www.google.com/maps/search/?api=1&query=GPdI+El-Shaddai+Jababeka+II+Ruko+Food+Promenade+CBP+Unit+8G+Cikarang+Bekasi",
-      musicUrl: "assets/music.mp3",
 
-      // Foto-foto spesifik (menggunakan ID Google Drive yang diberikan)
+      // File MP3 lokal di laptop (letakkan sejajar dengan wed.html atau di dalam folder assets/)
+      musicLocalPrimary: "through it all - hillsong.mp3",
+      musicFallbackLocal: "assets/music.mp3",
+
       photos: {
-        cover: "1hM6Wnemg09BnGmdjUvIMGfdkdsCMFF0e",
-        hero: "1hM6Wnemg09BnGmdjUvIMGfdkdsCMFF0e",
-        groom: "14yYT4KpYcR1DXeo-pKQDpz9Y9_KVljLx",
-        bride: "1E4sq8rNQu-taNxqz5NorfP2ocIqaoCg9",
-        loveStory: "1QHtGvVbeJwEFfMNa0YonLXZA-1PX0YhB"
+        cover: "1L7xMtLw8fA5Y3vj_i8Vghgh_ip7DKlML",      // foto buka undangan di halaman awal.jpeg
+        hero: "1sg5lqZIhO8jxphRw_Rc5qhvZFc_FJVZt",       // foto Nikah Awal.jpeg
+        groom: "1yTktbMOoQjpiZLs9Ep4bYhhCb-RUJzoE",      // Meylius.jpeg
+        bride: "1w2M-x7qMiBSRLp0cC0GUgzjZ-vAfIDC5",      // Listra.jpeg
+        loveStory: "1L5NmHkNJuVoveW7mStJ1qffaBGLa17_s"   // Love story.jpeg
       },
 
-      // Seluruh 8 ID foto Google Drive untuk Galeri Slideshow & Lightbox
       galleryIds: [
-        "1hM6Wnemg09BnGmdjUvIMGfdkdsCMFF0e",
-        "14yYT4KpYcR1DXeo-pKQDpz9Y9_KVljLx",
-        "1E4sq8rNQu-taNxqz5NorfP2ocIqaoCg9",
         "1L7xMtLw8fA5Y3vj_i8Vghgh_ip7DKlML",
-        "1MhqNFgmeH5tLKAlSbGyjxAQ1LmtnOEvz",
+        "1T4tQTHBcohDWK1DIYX2l3yyWft8t-K9y",
+        "1sg5lqZIhO8jxphRw_Rc5qhvZFc_FJVZt",
+        "1yTktbMOoQjpiZLs9Ep4bYhhCb-RUJzoE",
+        "1w2M-x7qMiBSRLp0cC0GUgzjZ-vAfIDC5",
         "1L5NmHkNJuVoveW7mStJ1qffaBGLa17_s",
-        "1QHtGvVbeJwEFfMNa0YonLXZA-1PX0YhB",
-        "1ZDCv11MElCsedOvQrH-EquxEJxT4fMp9"
+        "1XQTBI8PQh4ioWOeFNX5gXUSlHOEmwb8J",
+        "1MhqNFgmeH5tLKAlSbGyjxAQ1LmtnOEvz",
+        "1E4sq8rNQu-taNxqz5NorfP2ocIqaoCg9",
+        "1ZDCv11MElCsedOvQrH-EquxEJxT4fMp9",
+        "1m7kPtBc52Cz5iLo391iJUjyhkIqEoSUG",
+        "1QHtGvVbeJwEFfMNa0YonLXZA-1PX0YhB"
       ],
 
-      // Informasi Rekening Wedding Gift
-      gift: {
-        bankName: "Bank Central Asia (BCA)",
-        accountHolder: "Meylius Galeh Raharto",
-        accountNumber: "1234567890"
-      },
+      gifts: [
+        {
+          bankName: "Bank Mayora",
+          accountHolder: "Meylius Galeh Raharto",
+          accountNumber: "1234567890"
+        },
+        {
+          bankName: "Bank Central Asia (BCA)",
+          accountHolder: "Listra Luahambowo",
+          accountNumber: "0987654321"
+        }
+      ],
 
-      // Contoh ucapan awal jika localStorage masih kosong
       defaultWishes: [
         {
           id: "seed-1",
@@ -1647,7 +1754,7 @@
 
     /**
      * =========================================================================
-     * HELPER KONVERSI GOOGLE DRIVE + FALLBACK OTOMATIS
+     * HELPER KONVERSI GOOGLE DRIVE (FOTO & AUDIO) + FALLBACK OTOMATIS
      * =========================================================================
      */
     function extractDriveId(input) {
@@ -1667,6 +1774,23 @@
 
     function getDriveThumbnailUrl(driveId) {
       return `https://drive.google.com/thumbnail?id=${driveId}&sz=w1600`;
+    }
+
+    function getAudioSources() {
+      const list = [];
+      if (WEDDING_CONFIG.musicLocalPrimary) {
+        list.push({
+          url: encodeURI(WEDDING_CONFIG.musicLocalPrimary),
+          label: WEDDING_CONFIG.musicLocalPrimary
+        });
+      }
+      if (WEDDING_CONFIG.musicFallbackLocal) {
+        list.push({
+          url: encodeURI(WEDDING_CONFIG.musicFallbackLocal),
+          label: WEDDING_CONFIG.musicFallbackLocal
+        });
+      }
+      return list;
     }
 
     function applyPhotoWithFallback(imgEl, idOrUrl, labelText) {
@@ -1692,24 +1816,6 @@
       imgEl.src = primarySrc;
     }
 
-    function applyCoverBackground(coverEl, idOrUrl) {
-      if (!coverEl || !idOrUrl) return;
-      const driveId = extractDriveId(idOrUrl);
-      const primaryUrl = driveId ? getDriveDirectUrl(driveId) : idOrUrl;
-      const fallbackUrl = driveId ? getDriveThumbnailUrl(driveId) : "";
-
-      const probe = new Image();
-      probe.onload = () => {
-        coverEl.style.backgroundImage = `url("${primaryUrl}")`;
-      };
-      probe.onerror = () => {
-        if (fallbackUrl) {
-          coverEl.style.backgroundImage = `url("${fallbackUrl}")`;
-        }
-      };
-      probe.src = primaryUrl;
-    }
-
     /**
      * =========================================================================
      * TOAST NOTIFICATION
@@ -1723,72 +1829,181 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         toastEl.classList.remove("show");
-      }, 2800);
+      }, 3200);
     }
 
     /**
      * =========================================================================
-     * SAPAAN NAMA TAMU OTOMATIS (?to=Nama+Tamu)
+     * SAPAAN NAMA TAMU OTOMATIS DARI PARAMETER URL (?to=Nama+Tamu)
      * =========================================================================
      */
     (function initGuestGreeting() {
+      const guestDisplayEl = document.getElementById("guestDisplay");
+      const rsvpNameInput = document.getElementById("rsvpName");
+
       try {
         const params = new URLSearchParams(window.location.search);
         const guestParam = params.get("to") || params.get("kepada");
         if (guestParam && guestParam.trim()) {
-          document.getElementById("guestDisplay").textContent = guestParam.trim();
-          const rsvpNameInput = document.getElementById("rsvpName");
-          if (rsvpNameInput && !rsvpNameInput.value) {
-            rsvpNameInput.value = guestParam.trim();
+          const cleanGuest = guestParam.trim();
+          guestDisplayEl.textContent = cleanGuest;
+          if (rsvpNameInput) {
+            rsvpNameInput.value = cleanGuest;
           }
+          return;
         }
       } catch (e) {
         // Abaikan jika parameter URL tidak tersedia
       }
+
+      guestDisplayEl.textContent = "Tamu Undangan";
     })();
 
     /**
      * =========================================================================
-     * BUKA COVER & KONTROL MUSIK LATAR
+     * BUKA COVER & KONTROL MUSIK LATAR (MULTI-SUMBER + FALLBACK LOKAL)
      * =========================================================================
      */
     const coverScreen = document.getElementById("coverScreen");
     const openInviteBtn = document.getElementById("openInviteBtn");
     const bgMusic = document.getElementById("bgMusic");
     const musicToggle = document.getElementById("musicToggle");
+    const audioCandidates = getAudioSources();
+    let activeAudioIndex = 0;
+    let isSwitchingAudio = false;
 
     function setMusicPlayingUI(playing) {
       if (playing) {
         musicToggle.classList.add("playing");
         musicToggle.setAttribute("aria-label", "Jeda musik latar");
+        musicToggle.title = "Jeda Musik Latar";
       } else {
         musicToggle.classList.remove("playing");
         musicToggle.setAttribute("aria-label", "Putar musik latar");
+        musicToggle.title = "Putar Musik Latar";
       }
     }
+
+    function playSpecificCandidate(index) {
+      return new Promise((resolve) => {
+        if (!audioCandidates.length) {
+          resolve({ ok: false, reason: "no-source" });
+          return;
+        }
+
+        const safeIdx = ((index % audioCandidates.length) + audioCandidates.length) % audioCandidates.length;
+        activeAudioIndex = safeIdx;
+        const candidate = audioCandidates[safeIdx];
+
+        let settled = false;
+        const finish = (ok, reason) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timeoutId);
+          bgMusic.removeEventListener("error", onError);
+          bgMusic.removeEventListener("playing", onPlaying);
+          resolve({ ok, reason, candidate });
+        };
+
+        const onError = () => finish(false, "error");
+        const onPlaying = () => finish(true, "playing");
+
+        const timeoutId = setTimeout(() => {
+          if (!bgMusic.paused && bgMusic.currentTime > 0) {
+            finish(true, "playing");
+          } else {
+            finish(false, "timeout");
+          }
+        }, 4500);
+
+        bgMusic.addEventListener("error", onError, { once: true });
+        bgMusic.addEventListener("playing", onPlaying, { once: true });
+
+        isSwitchingAudio = true;
+        bgMusic.src = candidate.url;
+        bgMusic.load();
+
+        const playPromise = bgMusic.play();
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise
+            .then(() => {
+              isSwitchingAudio = false;
+              finish(true, "playing");
+            })
+            .catch(() => {
+              isSwitchingAudio = false;
+              finish(false, "blocked-or-failed");
+            });
+        } else {
+          isSwitchingAudio = false;
+        }
+      });
+    }
+
+    async function startBackgroundMusic() {
+      if (!audioCandidates.length) return false;
+
+      for (let i = 0; i < audioCandidates.length; i++) {
+        const res = await playSpecificCandidate(i);
+        if (res.ok) {
+          setMusicPlayingUI(true);
+          return true;
+        }
+      }
+
+      setMusicPlayingUI(false);
+      return false;
+    }
+
+    bgMusic.addEventListener("play", () => setMusicPlayingUI(true));
+    bgMusic.addEventListener("pause", () => {
+      if (!isSwitchingAudio) {
+        setMusicPlayingUI(false);
+      }
+    });
 
     openInviteBtn.addEventListener("click", () => {
       coverScreen.classList.add("is-open");
       document.body.classList.add("unlocked");
-      bgMusic.play().then(() => {
-        setMusicPlayingUI(true);
-      }).catch(() => {
-        setMusicPlayingUI(false);
+
+      startBackgroundMusic().then((played) => {
+        if (!played) {
+          showToast("File lagu tidak ditemukan. Pastikan 'through it all - hillsong.mp3' ada di folder yang sama dengan wed.html.");
+        }
       });
     });
 
     musicToggle.addEventListener("click", () => {
-      if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-          setMusicPlayingUI(true);
-          showToast("Musik latar diputar");
-        }).catch(() => {
-          showToast("Letakkan file musik di assets/music.mp3");
-        });
-      } else {
+      if (!bgMusic.paused) {
         bgMusic.pause();
         setMusicPlayingUI(false);
         showToast("Musik latar dijeda");
+        return;
+      }
+
+      if (bgMusic.src && bgMusic.readyState >= 2) {
+        bgMusic.play()
+          .then(() => {
+            setMusicPlayingUI(true);
+            showToast("Musik latar diputar");
+          })
+          .catch(() => {
+            startBackgroundMusic().then((played) => {
+              if (played) {
+                showToast("Musik latar diputar");
+              } else {
+                showToast("File lagu tidak ditemukan. Pastikan 'through it all - hillsong.mp3' satu folder dengan wed.html.");
+              }
+            });
+          });
+      } else {
+        startBackgroundMusic().then((played) => {
+          if (played) {
+            showToast("Musik latar diputar");
+          } else {
+            showToast("Musik belum dapat diputar. Cek file assets/music.mp3 atau izin Drive.");
+          }
+        });
       }
     });
 
@@ -1869,7 +2084,6 @@
      * =========================================================================
      */
     document.getElementById("addToCalendarBtn").addEventListener("click", () => {
-      // 28 Desember 2026 10:00 WIB (+07:00) = 03:00 UTC hingga 06:00 UTC (13:00 WIB)
       const icsContent = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
@@ -1903,7 +2117,7 @@
      * FOTO PROFIL, GALERI SLIDESHOW, GRID & LIGHTBOX
      * =========================================================================
      */
-    applyCoverBackground(coverScreen, WEDDING_CONFIG.photos.cover);
+    applyPhotoWithFallback(document.getElementById("coverPhoto"), WEDDING_CONFIG.photos.cover, "Meylius & Listra");
     applyPhotoWithFallback(document.getElementById("heroPhoto"), WEDDING_CONFIG.photos.hero, "Meylius & Listra");
     applyPhotoWithFallback(document.getElementById("groomPhoto"), WEDDING_CONFIG.photos.groom, "Meylius");
     applyPhotoWithFallback(document.getElementById("bridePhoto"), WEDDING_CONFIG.photos.bride, "Listra");
@@ -1922,7 +2136,6 @@
       galleryGridEl.innerHTML = "";
 
       WEDDING_CONFIG.galleryIds.forEach((id, idx) => {
-        // Slide Item
         const slideImg = document.createElement("img");
         slideImg.className = idx === 0 ? "slide-item active" : "slide-item";
         slideImg.alt = `Momen Meylius & Listra ${idx + 1}`;
@@ -1930,7 +2143,6 @@
         slideImg.addEventListener("click", () => openLightbox(idx));
         slideshowStage.appendChild(slideImg);
 
-        // Dot Indicator
         const dotBtn = document.createElement("button");
         dotBtn.type = "button";
         dotBtn.className = idx === 0 ? "slide-dot active" : "slide-dot";
@@ -1940,10 +2152,10 @@
         });
         slideDotsEl.appendChild(dotBtn);
 
-        // Grid Thumbnail
         const thumbWrap = document.createElement("div");
         thumbWrap.className = "gallery-thumb";
         const thumbImg = document.createElement("img");
+        thumbImg.loading = "lazy";
         thumbImg.alt = `Galeri foto ${idx + 1}`;
         applyPhotoWithFallback(thumbImg, id, `Foto ${idx + 1}`);
         thumbWrap.appendChild(thumbImg);
@@ -2129,14 +2341,19 @@
 
     /**
      * =========================================================================
-     * WEDDING GIFT & SALIN TEKS (ALAMAT & NOMOR REKENING)
+     * WEDDING GIFT (DUA REKENING) & SALIN TEKS
      * =========================================================================
      */
-    document.getElementById("giftBankLabel").textContent = WEDDING_CONFIG.gift.bankName;
-    document.getElementById("giftHolderLabel").textContent = WEDDING_CONFIG.gift.accountHolder;
-    document.getElementById("giftAccountLabel").textContent = WEDDING_CONFIG.gift.accountNumber;
-    document.getElementById("bgMusicSource").src = WEDDING_CONFIG.musicUrl;
-    bgMusic.load();
+    const gift1 = WEDDING_CONFIG.gifts[0];
+    const gift2 = WEDDING_CONFIG.gifts[1];
+
+    document.getElementById("giftBank1").textContent = gift1.bankName;
+    document.getElementById("giftHolder1").textContent = gift1.accountHolder;
+    document.getElementById("giftAccount1").textContent = gift1.accountNumber;
+
+    document.getElementById("giftBank2").textContent = gift2.bankName;
+    document.getElementById("giftHolder2").textContent = gift2.accountHolder;
+    document.getElementById("giftAccount2").textContent = gift2.accountNumber;
 
     function copyTextToClipboard(text, successMsg) {
       const textarea = document.createElement("textarea");
@@ -2170,8 +2387,12 @@
       copyTextToClipboard(fullText, "Alamat lokasi acara berhasil disalin");
     });
 
-    document.getElementById("copyAccountBtn").addEventListener("click", () => {
-      copyTextToClipboard(WEDDING_CONFIG.gift.accountNumber, "Nomor rekening berhasil disalin");
+    document.getElementById("copyAccount1Btn").addEventListener("click", () => {
+      copyTextToClipboard(gift1.accountNumber, `Nomor rekening ${gift1.bankName} (Meylius) berhasil disalin`);
+    });
+
+    document.getElementById("copyAccount2Btn").addEventListener("click", () => {
+      copyTextToClipboard(gift2.accountNumber, `Nomor rekening ${gift2.bankName} (Listra) berhasil disalin`);
     });
   </script>
 
